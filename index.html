@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>小小角色遊戲</title>
+    <style>
+        #map {
+            width: 300px; height: 300px;
+            background-color: #eef;
+            position: relative;
+            border: 2px solid #333;
+        }
+        #player {
+            width: 30px; height: 30px;
+            background-color: red;
+            position: absolute;
+            left: 0; top: 0;
+            transition: 0.1s;
+        }
+        #dialog {
+            margin-top: 10px;
+            padding: 5px;
+            background: #fff3cd;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>角色遊戲示範</h1>
+<div id="map">
+    <div id="player"></div>
+</div>
+<div id="dialog">你好啊，我是村民！</div>
+
+<script>
+    const player = document.getElementById('player');
+    const dialog = document.getElementById('dialog');
+    let x = 0, y = 0;
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') x += 30;
+        if (e.key === 'ArrowLeft') x -= 30;
+        if (e.key === 'ArrowDown') y += 30;
+        if (e.key === 'ArrowUp') y -= 30;
+
+        x = Math.max(0, Math.min(x, 270));
+        y = Math.max(0, Math.min(y, 270));
+        player.style.left = x + 'px';
+        player.style.top = y + 'px';
+
+        // 簡單的對話觸發點（站到 60,60 顯示對話）
+        if (x === 60 && y === 60) {
+            dialog.style.display = 'block';
+        } else {
+            dialog.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
