@@ -93,4 +93,21 @@ function restartQuiz() {
     showQuestion();
 }
 
+// 範例：每隔一秒增加 10% 進度，直到 100%
+let pct = 0;
+const fill = document.querySelector('.progress-watercolor__fill');
+const icon = document.querySelector('.progress-watercolor__icon');
+
+function updateProgress(to) {
+    pct = Math.min(100, Math.max(0, to));
+    fill.style.width = pct + '%';
+    icon.style.left = pct + '%';
+}
+
+// 示範動態增加
+const interval = setInterval(() => {
+    updateProgress(pct + 10);
+    if (pct >= 100) clearInterval(interval);
+}, 1000);
+
 document.addEventListener('DOMContentLoaded', showQuestion);
